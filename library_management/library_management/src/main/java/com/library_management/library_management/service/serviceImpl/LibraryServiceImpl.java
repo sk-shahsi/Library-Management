@@ -58,7 +58,11 @@ public class LibraryServiceImpl implements LibraryService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+        // Check if the user has reached the borrowing limit of 2 books
 
+        if (user.getBorrowedBooks().size() >= 2) {
+            return "Borrowing limit reached";
+        }
         // Check if the user has already borrowed this book (only 1 copy per user)
         if (user.getBorrowedBooks().contains(book)) {
             return "Book already borrowed by the user";
