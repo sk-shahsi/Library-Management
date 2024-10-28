@@ -83,5 +83,30 @@ public class LibraryServiceImpl implements LibraryService {
         return "Book borrowed successfully";
     }
 
+    @Override
+    public String returnBook(Long userId, Long bookId) {
+        // Fetch the user and book entities from the database using their IDs
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+        // Check if the user has actually borrowed this book
+
+        if (!user.getBorrowedBooks().contains(book)) {
+            return "Book not in borrowed list";
+        }
+
+        // Remove the book from the user's borrowed list and increment the book's available copies
+
+        user.getBorrowedBooks().remove(book);
+        book.setTotalCopies(book.getTotalCopies() + 1);
+
+        // Persist the updated states of the book and user entities in the database
+        bookRepository.save(book);
+        userRepository.save(user);
+
+        return "Book returned successfully";
+    }
+
 
 }

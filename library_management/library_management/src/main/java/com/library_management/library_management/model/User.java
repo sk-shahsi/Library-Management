@@ -19,6 +19,10 @@ public class User {
     // Default constructor for JPA
     public User() {
     }
+    public User(String name) {
+        this.name=name;
+    }
+
 
 
     public Long getId() {

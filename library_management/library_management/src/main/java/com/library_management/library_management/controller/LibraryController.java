@@ -43,4 +43,16 @@ public class LibraryController {
         String result = libraryService.borrowBook(userId, bookId);
         return ResponseEntity.ok(result);
     }
+    /**
+     * API endpoint to allow a user to return a borrowed book to the library.
+     *
+     * @param userId ID of the user
+     * @param bookId ID of the book to be returned
+     * @return Response message indicating success or failure of the return action
+     */
+    @PostMapping("/return/{userId}/{bookId}")
+    public ResponseEntity<String> returnBook(@PathVariable Long userId, @PathVariable Long bookId) {
+        String result = libraryService.returnBook(userId, bookId);
+        return ResponseEntity.ok(result);
+    }
 }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface LibraryService {
     List<Book> viewAvailableBooks();
     String borrowBook(Long userId, Long bookId);
+    String returnBook(Long userId, Long bookId);
 }

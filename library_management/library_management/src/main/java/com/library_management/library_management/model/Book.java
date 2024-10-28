@@ -63,6 +63,12 @@ public class Book {
 
     }
 
+    public Book(String title, String author, int totalCopies) {
+        this.title = title;
+        this.author = author;
+        this.totalCopies = totalCopies;
+    }
+
     // Constructor to initialize the book with title, author, and number of copies available
     public Book(Long id, String title, String author, int totalCopies, int availableCopies) {
         this.id = id;
